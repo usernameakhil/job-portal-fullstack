@@ -90,7 +90,7 @@ const API_URL = import.meta.env.VITE_API_URL;
     if (!resumeLink) return alert("Please enter a resume link!");
 
     try {
-      const response = await fetch('http://localhost:5001/api/applications', {
+      const response = await fetch(`${API_URL}/api/applications`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
