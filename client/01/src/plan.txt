@@ -1,0 +1,35 @@
+client/
+├─ src/
+│  ├─ api/
+│  │   ├─ auth.js
+│  │   ├─ jobs.js             # Post job, Get all jobs
+│  │   └─ ai.js               # The magic: send data to get score
+│  │
+│  ├─ components/
+│  │   ├─ Navbar.jsx
+│  │   ├─ JobCard.jsx
+│  │   ├─ MatchScoreBadge.jsx # Shows "85% Match" in green/red
+│  │   └─ ProtectedRoute.jsx
+│  │
+│  ├─ context/
+│  │   └─ AuthContext.jsx
+│  │
+│  ├─ pages/
+│  │   ├─ LandingPage.jsx     # Hero section
+│  │   ├─ Auth/
+│  │   │   ├─ Login.jsx
+│  │   │   └─ Register.jsx    # Choose: Student or Recruiter
+│  │   │
+│  │   ├─ Student/
+│  │   │   ├─ Dashboard.jsx   # List of jobs
+│  │   │   ├─ ProfileBuilder.jsx # Input Skills/Education (Resume)
+│  │   │   └─ MyApplications.jsx
+│  │   │
+│  │   └─ Recruiter/
+│  │       ├─ PostJob.jsx
+│  │       └─ JobApplicants.jsx # Table sorted by AI Score
+│  │
+│  ├─ App.jsx
+│  └─ main.jsx
+│
+└─ tailwind.config.js
