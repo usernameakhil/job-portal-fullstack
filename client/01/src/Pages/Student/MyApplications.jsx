@@ -7,14 +7,14 @@ const MyApplications = () => {
   const { user } = useAuth(); // 1. Get User Token
   const [applications, setApplications] = useState([]);
   const [loading, setLoading] = useState(true);
-
+const API_URL = import.meta.env.VITE_API_URL;
   // --- FETCH REAL APPLICATIONS FROM DB ---
   useEffect(() => {
     const fetchMyApps = async () => {
       if (!user?.token) return;
 
       try {
-        const response = await fetch('http://localhost:5001/api/applications/my-applications', {
+        const response = await fetch(`${API_URL}/api/applications/my-applications`, {
           headers: {
             'Authorization': `Bearer ${user.token}` // Send Token to prove identity
           }

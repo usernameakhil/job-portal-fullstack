@@ -22,6 +22,7 @@ const Register = () => {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+  const API_URL = import.meta.env.VITE_API_URL;
 
   // --- UPDATED SUBMIT FUNCTION ---
   const handleSubmit = async (e) => {
@@ -30,7 +31,7 @@ const Register = () => {
 
     try {
       // 1. CALL THE API (Connect to Backend)
-      const response = await fetch('http://localhost:5001/api/auth/register', {
+      const response = await fetch(`${API_URL}/api/auth/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

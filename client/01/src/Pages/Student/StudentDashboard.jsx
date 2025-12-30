@@ -23,13 +23,13 @@ const StudentDashboard = () => {
   const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
   const [selectedJob, setSelectedJob] = useState(null); 
   const [resumeLink, setResumeLink] = useState('');
-
+const API_URL = import.meta.env.VITE_API_URL;
   // --- 1. FETCH JOBS (Public - Runs always) ---
   useEffect(() => {
     const fetchJobs = async () => {
       try {
         console.log("Fetching jobs...");
-        const response = await fetch('http://localhost:5001/api/jobs');
+        const response = await fetch(`${API_URL}/api/jobs`);
         const data = await response.json();
         
         if (response.ok) {
@@ -51,7 +51,7 @@ const StudentDashboard = () => {
       if (!user?.token) return;
 
       try {
-        const response = await fetch('http://localhost:5001/api/applications/my-applications', {
+        const response = await fetch(`${API_URL}/api/applications/my-applications`, {
           headers: { 'Authorization': `Bearer ${user.token}` }
         });
         
@@ -107,7 +107,7 @@ const StudentDashboard = () => {
     try {
       console.log("Applying to:", selectedJob.title, "Recruiter:", selectedJob.recruiterId);
 
-      const response = await fetch('http://localhost:5001/api/applications', {
+      const response = await fetch(`${API_URL}/api/applications`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -149,7 +149,7 @@ const StudentDashboard = () => {
     try {
       const skillsArray = profileData.skills.split(',').map(s => s.trim());
       
-      const response = await fetch('http://localhost:5001/api/users/profile', {
+      const response = await fetch(`${API_URL}/api/users/profile`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

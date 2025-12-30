@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import GoogleButton from '../../Components/GoogleButton';
 import { useAuth } from '../../Context/AuthContext';
-
+const API_URL = import.meta.env.VITE_API_URL;
 const Login = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
@@ -21,7 +21,7 @@ const Login = () => {
 
     try {
       // 1. Send data to Backend
-      const response = await fetch('http://localhost:5001/api/auth/login', {
+      const response = await fetch(`${API_URL}/api/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

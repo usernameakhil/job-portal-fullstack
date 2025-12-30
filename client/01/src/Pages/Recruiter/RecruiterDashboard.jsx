@@ -20,12 +20,12 @@ const RecruiterDashboard = () => {
     title: '', company: '', location: '', salary: '', 
     type: 'Full-time', description: '', requirements: '' 
   });
-
+  const API_URL = import.meta.env.VITE_API_URL;
   // --- 1. FETCH JOBS ---
   useEffect(() => {
     const fetchMyJobs = async () => {
       try {
-        const response = await fetch('http://localhost:5001/api/jobs/my-jobs', {
+        const response = await fetch(`${API_URL}/api/jobs/my-jobs`, {
           headers: { 'Authorization': `Bearer ${user.token}` }
         });
         const data = await response.json();
@@ -47,7 +47,7 @@ const RecruiterDashboard = () => {
         ...newJob,
         requirements: newJob.requirements.split(',').map(req => req.trim())
       };
-      const response = await fetch('http://localhost:5001/api/jobs', {
+      const response = await fetch(`${API_URL}/api/jobs`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${user.token}` },
         body: JSON.stringify(formattedJob)
@@ -67,7 +67,7 @@ const RecruiterDashboard = () => {
   const deletePost = async (id) => {
     if (!window.confirm("Delete this job?")) return;
     try {
-      await fetch(`http://localhost:5001/api/jobs/${id}`, {
+      await fetch(`${API_URL}/api/jobs/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${user.token}` }
       });
@@ -81,7 +81,7 @@ const RecruiterDashboard = () => {
   const viewApplicants = async (jobId) => {
     setSelectedJobId(jobId);
     try {
-      const response = await fetch(`http://localhost:5001/api/applications/${jobId}`, {
+      const response = await fetch(`${API_URL}/api/applications/${jobId}`, {
         headers: { 'Authorization': `Bearer ${user.token}` }
       });
       const data = await response.json();
@@ -95,7 +95,7 @@ const RecruiterDashboard = () => {
   // --- 5. UPDATE STATUS (ACCEPT / REJECT) ---
   const handleStatusUpdate = async (applicationId, newStatus) => {
     try {
-      const response = await fetch(`http://localhost:5001/api/applications/${applicationId}/status`, {
+      const response = await fetch(`${API_URL}/api/applications/${applicationId}/status`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

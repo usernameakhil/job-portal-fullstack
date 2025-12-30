@@ -7,7 +7,7 @@ const JobApplications = () => {
   const { user } = useAuth(); // Get Recruiter Token
   const [applications, setApplications] = useState([]);
   const [loading, setLoading] = useState(true);
-
+const API_URL = import.meta.env.VITE_API_URL;
   // --- 1. FETCH APPLICATIONS FROM DB ---
   useEffect(() => {
     const fetchApplications = async () => {
@@ -15,7 +15,7 @@ const JobApplications = () => {
 
       try {
         // Fetch applications ONLY for jobs posted by this Recruiter
-        const response = await fetch('http://localhost:5001/api/applications/recruiter-applications', {
+        const response = await fetch(`${API_URL}/api/applications/recruiter-applications`, {
           headers: {
             'Authorization': `Bearer ${user.token}`
           }
@@ -41,7 +41,7 @@ const JobApplications = () => {
   // --- 2. UPDATE STATUS (Accept/Reject) ---
   const handleStatusChange = async (appId, newStatus) => {
     try {
-      const response = await fetch(`http://localhost:5001/api/applications/${appId}/status`, {
+      const response = await fetch(`${API_URL}/api/applications/${appId}/status`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

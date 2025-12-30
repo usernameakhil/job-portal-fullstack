@@ -21,12 +21,12 @@ const FindJobs = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedJob, setSelectedJob] = useState(null);
   const [resumeLink, setResumeLink] = useState(""); 
-
+const API_URL = import.meta.env.VITE_API_URL;
   // --- 1. FETCH JOBS ---
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await fetch('http://localhost:5001/api/jobs');
+        const response = await fetch(`${API_URL}/api/jobs`);
         const data = await response.json();
         
         if (response.ok) {
